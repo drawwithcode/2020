@@ -1,0 +1,50 @@
+body {
+  display: grid;
+  grid-template-columns: repeat(4, 25vw);
+  padding: 0 5%;
+  font-family: "DM Mono", monospace;
+  -webkit-font-smoothing: none;
+  background: #F9F9F9;
+  color: #333333;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.container {
+  grid-column: 1 / span 3;
+  display: grid;
+  grid-template-columns: repeat(4, 25vw);
+}
+
+.container section {
+  grid-column: 1 / span 3;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #333333;
+  display: flex;
+  justify-content: space-between;
+}
+
+li * {
+  width: 33%;
+  margin-right: 1rem;
+}
+
+li a {
+  font-weight: 400;
+}
+
+.assignment li {
+  display: flex;
+}
+
+.assignment li * {
+  width: 100%;
+}
