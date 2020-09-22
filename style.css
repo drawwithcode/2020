@@ -1,23 +1,44 @@
 body {
   display: grid;
-  grid-template-columns: repeat(4, 25vw);
+  grid-template-columns: repeat(4, 25%);
   padding: 0 5%;
   font-family: "DM Mono", monospace;
-  -webkit-font-smoothing: none;
+  /* -webkit-font-smoothing: none; */
   background: #F9F9F9;
   color: #333333;
   font-size: 15px;
   font-weight: 300;
 }
 
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+  /* display: none; */
+}
+
+main {
+  grid-column: 1 / span 4;
+}
+
+p {
+  margin: 0;
+  text-shadow:
+   -2px -2px 0 #F9F9F9,
+    2px -2px 0 #F9F9F9,
+    -2px 2px 0 #F9F9F9,
+     2px 2px 0 #F9F9F9;
+}
+
 .container {
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 4;
   display: grid;
-  grid-template-columns: repeat(4, 25vw);
+  grid-template-columns: repeat(4, 25%);
 }
 
 .container section {
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 4;
 }
 
 ul {
@@ -27,7 +48,7 @@ ul {
 
 li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #333333;
+  border-bottom: 1px solid #AAAAAA;
   display: flex;
   justify-content: space-between;
 }
@@ -41,10 +62,31 @@ li a {
   font-weight: 400;
 }
 
-.assignment li {
+.assignment .student-assignment div {
   display: flex;
+  justify-content: space-between;
+}
+
+.assignment .assignment-picture {
+  width: 80px;
+  height: 80px;
 }
 
 .assignment li * {
-  width: 100%;
+  width: calc(100% - 80px);
+}
+
+.assignment div {
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+}
+
+.assignment h3 {
+  position: sticky;
+  top: 1rem;
+  height: 1rem;
+}
+
+.assignment ul {
+  grid-column: 2 / span 2;
 }

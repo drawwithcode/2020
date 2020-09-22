@@ -23,6 +23,7 @@ function init() {
       if (d.link != "") {
         console.log(d.link != "");
         let lesson = lessons.append("li");
+
         lesson.append("p")
         .append("a")
         .attr("href", d.link)
@@ -38,8 +39,8 @@ function init() {
     });
 
     let assignment = d3.select('#assignments').selectAll('.assignment').data(data.assignments.columnNames.slice(3, data.assignments.columnNames.length))
-  assignment.exit();
-  assignment = assignment.enter().append('div')
+    assignment.exit();
+    assignment = assignment.enter().append('div')
     .classed('assignment', true)
     .merge(assignment)
     .append('div')
@@ -73,35 +74,35 @@ function init() {
         studentAssignment.exit().remove();
 
         studentAssignment = studentAssignment.enter().append('li')
-          .classed('student-assignment', true)
-          .merge(studentAssignment)
+        .classed('student-assignment', true)
+        .merge(studentAssignment)
 
-        let single = studentAssignment.append('div').style('display', 'none').style('opacity', 0)
+        let single = studentAssignment.append('div').style('opacity', 0)
 
-        single.append('a')
-          .attr('class', 'assignment-picture')
-          .attr('target', '_blank')
-          .attr('href', function(e) {
-            let repo = e[d].split('/')
-            repo = repo[repo.length-1]
-            e.repo = repo
-            return `https://drawwithcode.github.io/${repo}`;
-          })
-          .style('background-image', function(e) {
-            return `url("https://raw.githubusercontent.com/drawwithcode/${e.repo}/master/cover.png"),url("https://via.placeholder.com/150x150/18FF68/000?text=no+image")`;
-          })
+        single.append('p')
+        .attr('class', 'assignment-picture')
+        .append('a')
+        .attr('target', '_blank')
+        .attr('href', function(e) {
+          let repo = e[d].split('/')
+          repo = repo[repo.length-1]
+          e.repo = repo
+          return `https://drawwithcode.github.io/${repo}`;
+        })
+        .style('background-image', function(e) {
+          return `url("https://raw.githubusercontent.com/drawwithcode/${e.repo}/master/cover.png"),url("https://via.placeholder.com/150x150/18FF68/000?text=no+image")`;
+        })
         single.append('p').classed('student-name', true).html(function(e) {
           // console.log(e)
           return `${e['surname-name']} <a style="color:var(--orange);" target="_blank" href="https://github.com/drawwithcode/${e[d]}"> <&sol;> </a>`
         })
 
         single.transition()
-          .duration(500)
-          .delay(function(e, i) {
-            return i * 10
-          })
-          .style('opacity', 1)
-          .style('display', 'block')
+        .duration(500)
+        .delay(function(e, i) {
+          return i * 10
+        })
+        .style('opacity', 1)
       }
 
     })
