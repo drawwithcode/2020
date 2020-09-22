@@ -1,14 +1,23 @@
 let p;
 let cyclic_t;
 let myAsciiArt;
-let asciiart_width = 120; let asciiart_height = 60;
+let asciiart_width = 160; let asciiart_height = 80;
 
-var num = 500;
+const Y_AXIS = 1;
+const X_AXIS = 2;
+
+let c1, c2;
+
+var num = 200;
 var noiseScale=500, noiseStrength=1;
 var particles = [num];
+var speed = 20;
 
 
 function setup() {
+
+  c1 = "#FFEFBA";
+  c2 = "#b8eefa";
   createCanvas(window.innerWidth, window.innerHeight);
   p = createGraphics(window.innerWidth, window.innerHeight);
   p.noStroke();
@@ -20,26 +29,20 @@ function setup() {
     var dir = p.createVector(p.cos(angle), p.sin(angle));
     var speed = p.random(0.5,2);
     // var speed = random(5,map(mouseX,0,width,5,20));   // faster
-    particles[i]= new Particle(loc, dir, speed);
+    particles[i]= new Particle(loc, dir, 4);
   }
 
   gfx = createGraphics(asciiart_width, asciiart_height);
-  gfx.pixelDensity(2);
+  gfx.pixelDensity(1);
   myAsciiArt = new AsciiArt(this);
   textAlign(CENTER, CENTER); textFont('DM Mono', 8); textStyle(NORMAL);
-  noStroke(); fill("#999");
-  // frameRate(15);
+  noStroke(); fill(0);
+  frameRate(10);
 }
 
 function draw() {
-  background("#F9F9F9")
-  // for (var x = 0; x < width; x+=5) {
-	// 	for (var y = 0; y < height; y+=5) {
-	// 		var c = 255 * noise(0.01 * x, 0.01 * y);
-	// 		p.fill(c);
-	// 		p.rect(x, y, 5, 5);
-	// 	}
-  // 	}
+  // setGradient(0, 0, width, height, c1, c2, Y_AXIS);
+  background(0, 0, 255)
 
   p.fill(0, 10);
   p.noStroke();
@@ -49,7 +52,7 @@ function draw() {
   }
 
   gfx.image(p, 0, 0, gfx.width, gfx.height);
-  gfx.filter(POSTERIZE, 3);
+  gfx.filter(POSTERIZE, 5);
   ascii_arr = myAsciiArt.convert(gfx);
   myAsciiArt.typeArray2d(ascii_arr, this);
   tint(255, pow(1.0 - (cyclic_t % 1.0), 4) * 255);
@@ -90,7 +93,29 @@ class Particle{
   }
   update(){
     p.fill(255);
-    p.ellipse(this.loc.x, this.loc.y, this.loc.z * 10);
+    p.ellipse(this.loc.x, this.loc.y, this.loc.z * 15);
+  }
+}
+
+function setGradient(x, y, w, h, c1, c2, axis) {
+  noFill();
+
+  if (axis === Y_AXIS) {
+    // Top to bottom gradient
+    for (let i = y; i <= y + h; i++) {
+      let inter = map(i, y, y + h, 0, 1);
+      let c = lerpColor(color(c1), color(c2), inter);
+      stroke(c);
+      line(x, i, x + w, i);
+    }
+  } else if (axis === X_AXIS) {
+    // Left to right gradient
+    for (let i = x; i <= x + w; i++) {
+      let inter = map(i, x, x + w, 0, 1);
+      let c = lerpColor(color(c1), color(c2), inter);
+      stroke(c);
+      line(i, y, i, y + h);
+    }
   }
 }
 

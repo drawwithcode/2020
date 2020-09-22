@@ -1,13 +1,17 @@
 body {
-  display: grid;
-  grid-template-columns: repeat(4, 25%);
+  /* display: grid;
+  grid-template-columns: repeat(4, 25%); */
   padding: 0 5%;
   font-family: "DM Mono", monospace;
-  -webkit-font-smoothing: none;
+  /* -webkit-font-smoothing: none; */
   background: #F9F9F9;
-  color: #000;
-  font-size: 15px;
-  font-weight: 300;
+  color: #eae5ab;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+body * {
+  font-size: 1rem;
 }
 
 canvas {
@@ -31,6 +35,16 @@ p {
      2px 2px 0 #F9F9F9; */
 }
 
+h1, h2, h3, h4 {
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+h4 {
+
+  text-align: center;
+}
+
 .container {
   grid-column: 1 / span 4;
   display: grid;
@@ -39,16 +53,23 @@ p {
 
 .container section {
   grid-column: 1 / span 4;
+  margin: 3rem 0;
+}
+
+a, a:visited {
+  background: #eae5ab;
+  color: #0000FF;
 }
 
 ul {
   padding: 0;
   list-style: none;
+  border-top: 1px solid #eae5ab;
 }
 
 li {
   padding: 0.5rem 0;
-  border-bottom: 1px solid #AAAAAA;
+  border-bottom: 1px solid #eae5ab;
   display: flex;
   justify-content: space-between;
 }
