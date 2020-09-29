@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src="p5.min.js"></script>
+  <script src="p5.asciiart.min.js"></script>
+  <script src="p5.sound.min.js"></script>
+  <script src="sketch.js"></script>
+</head>
+<body>
+  <div class="container">
+    <section>
+      <h1>Draw With Code: Creative Coding (5th edition)</h1>
+      <p>Coding made fun! Learn to design interactive and unexpected experiences for screens of all sizes in this elective course at Politecnico di Milano, Design School. The course is open to all Communication Design students, both enrolled in a bachelor and in a master program.</p>
+    </section>
+    <section>
+      <h4>Assignments</h4>
+      <ul id="assignments">
+
+			</ul>
+    </section>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
+	<script type="text/javascript">
+		const corsProxy = 'https://api.allorigins.win/raw?url=';
+		const dataUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTf_LLsUlurJ2ALeU7W8-73BdCV8og_cTbrav7uDBvQiygOarETHAgqSYYVVr7y3Itk1AJSzOBz74g1/pub?output=csv';
+
+		d3.csv(corsProxy+dataUrl).then(data=>{
+			// shuffle array, have different student at the top at each page loading
+			data = data.sort(() => Math.random() - 0.5)
+
+			d3.select('#assignments').selectAll('li')
+				.data(data, d=>'id-'+d['github-username'])
+				.join('li')
+				.classed('student',true)
+				.text(d=>d['surname-name'])
+				.append('ul')
+					.classed('assignments-list',true)
+					.selectAll('li')
+					.data(d=>{
+						const keys = Object.keys(d).filter(key=>key!=='surname-name'&&key!=='github-username'&&d[key]);
+						return keys.map(k=>({label:[k],repo:d[k]}))
+					}, id=>'ass-'+id)
+					.join('li')
+					.classed('assignment',true)
+					.on('click',(d)=>{
+						const win = window.open('https://drawwithcode.github.io/'+d.repo, '_blank');
+  					win.focus();
+					})
+					.style('background-image', function(e) {
+            return `url("https://raw.githubusercontent.com/drawwithcode/${e.repo}/master/cover.png"),url("https://via.placeholder.com/150x150/18FF68/000?text=no+image")`;
+          })
+					.text(d=>d.label)
+		})
+
+	</script>
+</body>
+</html>
