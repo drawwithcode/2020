@@ -32,8 +32,9 @@
 		const dataUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTf_LLsUlurJ2ALeU7W8-73BdCV8og_cTbrav7uDBvQiygOarETHAgqSYYVVr7y3Itk1AJSzOBz74g1/pub?output=csv';
 
 		d3.csv(corsProxy+dataUrl).then(data=>{
+			console.log(data)
 			// shuffle array, have different student at the top at each page loading
-			data = data.sort(() => Math.random() - 0.5)
+			// data = data.sort(() => Math.random() - 0.5)
 
 			d3.select('#assignments').selectAll('li')
 				.data(data, d=>'id-'+d['github-username'])
@@ -44,8 +45,9 @@
 					.classed('assignments-list',true)
 					.selectAll('li')
 					.data(d=>{
-						const keys = Object.keys(d).filter(key=>key!=='surname-name'&&key!=='github-username'&&d[key]);
-						return keys.map(k=>({label:[k],repo:d[k]}))
+						let keys = Object.keys(d).filter(key=>key!=='surname-name'&&key!=='github-username');
+						let mappedKeys = keys.map(k=>({label:[k],repo:d[k]}))
+						return mappedKeys
 					}, id=>'ass-'+id)
 					.join('li')
 					.classed('assignment',true)
@@ -53,10 +55,13 @@
 						const win = window.open('https://drawwithcode.github.io/'+d.repo, '_blank');
   					win.focus();
 					})
-					.style('background-image', function(e) {
-            return `url("https://raw.githubusercontent.com/drawwithcode/${e.repo}/master/cover.png"),url("https://via.placeholder.com/150x150/18FF68/000?text=no+image")`;
-          })
-					.text(d=>d.label)
+					.text(d=>d.repo?d.label:'')
+					.append('div')
+						.classed('background',true)
+						.style('background-image', function(e) {
+							const bg_img = e.repo?`url("https://raw.githubusercontent.com/drawwithcode/${e.repo}/master/cover.png")`:'url("https://via.placeholder.com/150x150/eae5ab/000?text=Coming Soon")'
+							return bg_img;
+						})
 		})
 
 	</script>
