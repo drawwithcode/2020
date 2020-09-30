@@ -14,7 +14,11 @@ const pages = [
 	{
 		"label":"Team Projects",
 		"url":"./team-projects.html"
-	}
+	},
+	// {
+	// 	"label":"Previous Editions",
+	// 	"url":"https://drawwithcode.github.io"
+	// }
 ]
 
 d3.select("#navigation")
@@ -35,6 +39,8 @@ d3.select("#footer")
 	<p>Michele Mauri</p>
 	<p>Tommaso Elli</p>
 	<p>Andrea Benedetti</p>
+	<br/>
+	<p><a href="https://drawwithcode.github.io">Previous Editions</a></p>
 </div>
 <div class="col-4">
 	<h3 class="mb-3">&MediumSpace;</h3>
