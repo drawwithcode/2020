@@ -78,6 +78,10 @@ li {
   justify-content: space-between;
 }
 
+li:last-child {
+  border: none;
+}
+
 li * {
   width: 33%;
   margin-right: 1rem;
