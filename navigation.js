@@ -15,5 +15,5 @@ const pages = [
 
 d3.select("#navigation").selectAll('a').data(pages).join('a')
 	.classed('navigation-link', true)
-	.attr('href',d=>d.url)
+	.attr('href',d=>window.location.origin+d.url)
 	.text(d=>d.label)
