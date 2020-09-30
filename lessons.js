@@ -4,13 +4,8 @@ var lecturesSpreadsheet = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSjla
 
 var lectures = corsProxy + lecturesSpreadsheet;
 
-console.log(lectures);
-
 d3.csv(lectures).then(data => {
-  console.log(data);
-
   let lessons = d3.select("#lessons");
-
       lessons.selectAll("li")
       .data(data)
       .enter()

@@ -44,17 +44,21 @@ h4 {
 
   text-align: center;
 }
-
-.container {
+/* Causing navigation to split on multiple lines */
+/* .container {
   grid-column: 1 / span 4;
   display: grid;
   grid-template-columns: repeat(4, 25%);
+} */
+
+body > .container {
+  min-height: 100vh;
 }
 
-.container section {
+/* .container section {
   grid-column: 1 / span 4;
   margin: 3rem 0;
-}
+} */
 
 a, a:visited {
   background: #eae5ab;
