@@ -55,7 +55,7 @@
 				.style('order',d=>d.randomIndex)
 				.text(d=>d['surname-name'])
 
-			student.append('ul')
+			let assignment = student.append('ul')
 					.classed('assignments-list',true)
 					.selectAll('li')
 					.data(d=>{
@@ -65,17 +65,30 @@
 					}, id=>'ass-'+id)
 					.join('li')
 					.classed('assignment',true)
-					.on('click',(d)=>{
+
+			assignment.append('div')
+				.classed('preview',true)
+				.style('background-image', function(e) {
+					const bg_img = e.repo?`url("https://raw.githubusercontent.com/drawwithcode/${e.repo}/master/cover.png")`:'url("https://via.placeholder.com/150x150/eae5ab/000?text=Coming Soon")'
+					return bg_img;
+				})
+				.style('cursor',d=>d.repo?'pointer':'default')
+				.on('click',(d)=>{
+					if (d.repo) {
 						const win = window.open('https://drawwithcode.github.io/'+d.repo, '_blank');
-  					win.focus();
-					})
-					.text(d=>d.repo?d.label:'')
-					.append('div')
-						.classed('background',true)
-						.style('background-image', function(e) {
-							const bg_img = e.repo?`url("https://raw.githubusercontent.com/drawwithcode/${e.repo}/master/cover.png")`:'url("https://via.placeholder.com/150x150/eae5ab/000?text=Coming Soon")'
-							return bg_img;
-						})
+						win.focus();
+					}
+				})
+			
+			assignment.append('a')
+				.attr('href',d=>d.repo?'https://github.com/drawwithcode/'+d.repo:null)
+				.attr('target','_blank')
+				.text(d=>'<repo/>')
+
+			// assignment.append('a')
+			// 	.attr('href',d=>d.repo?'https://drawwithcode.github.io/'+d.repo:'')
+			// 	.attr('target','_blank')
+			// 	.text(d=>'GH-page')
 			
 			d3.select('#click-to-sort').on('click',()=>{
 				randomOrder = !randomOrder;
