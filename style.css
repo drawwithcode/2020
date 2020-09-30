@@ -83,6 +83,13 @@ li a {
   font-weight: 400;
 }
 
+/* NAVIGATION */
+
+#navigation .navigation-link {
+  padding: 0.2rem;
+  margin: 0 0.5rem;
+}
+
 /* PAGE ASSIGNMENTS */
 
 .assignments-list {
