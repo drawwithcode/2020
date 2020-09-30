@@ -1,19 +1,19 @@
 const pages = [
 	{
 		"label":"Home",
-		"url":"/"
+		"url":"./"
 	},
 	{
 		"label":"Lessons",
-		"url":"/lessons"
+		"url":"./lessons.html"
 	},
 	{
 		"label":"Assignments",
-		"url":"/assignments"
+		"url":"./assignments.html"
 	}
 ]
 
 d3.select("#navigation").selectAll('a').data(pages).join('a')
 	.classed('navigation-link', true)
-	.attr('href',d=>window.location.origin+d.url)
+	.attr('href',d=>d.url)
 	.text(d=>d.label)

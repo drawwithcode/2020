@@ -8,7 +8,7 @@ const X_AXIS = 2;
 
 let c1, c2;
 
-var num = 200;
+var num = 150;
 var noiseScale=500, noiseStrength=1;
 var particles = [num];
 var speed = 20;
