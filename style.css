@@ -96,12 +96,13 @@ li a {
 #navigation .navigation-link {
   padding: 0.2rem;
   margin: 0 0.5rem;
+  white-space: nowrap;
 }
 
 /* PAGE ASSIGNMENTS */
 
 .assignments-list {
-  width: calc(100% - (2rem + 300px));
+  width: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -111,27 +112,6 @@ li a {
 }
 
 .assignment {
-
-  /* display: flex;
-  width: 7rem;
-  height: 7rem;
-  position: relative; */
-  background-color: transparent;
-  text-align: center;
-  font-size: 0.75rem;
-  align-items: center;
-  justify-content: center;
-  border-bottom: none;
-  margin: 0;
-  padding: 0;
-  margin: 0.5rem;
-  /* border-radius: 0.3rem;
-  overflow: hidden; */
-  /* cursor: pointer; */
-  color:#333;
-  /* border: 1px solid #eae5ab; */
-
-
   display: flex;
   flex-direction: column;
   background-color: transparent;
@@ -162,6 +142,13 @@ li a {
   background-size: cover;
   background-position: center;
   margin: 0 0 0.25rem 0;
+}
+
+@media only screen and (max-width: 767px)  {
+  .assignment > .preview {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 /* .assignment .student-assignment div {

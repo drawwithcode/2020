@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-	<meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<title>Draw with Code 2020</title>
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
@@ -53,10 +53,15 @@
 				.join('li')
 				.classed('student',true)
 				.style('order',d=>d.randomIndex)
+
+			student.append('div')
+				.classed('m-0', true)
+				.style('width','300px')
+				.style('max-width','50%')
 				.text(d=>d['surname-name'])
 
 			let assignment = student.append('ul')
-					.classed('assignments-list',true)
+					.classed('assignments-list m-0',true)
 					.selectAll('li')
 					.data(d=>{
 						let keys = Object.keys(d).filter(key=>key!=='surname-name'&&key!=='github-username'&&key!=='alphabeticalIndex'&&key!=='randomIndex');
