@@ -15,16 +15,28 @@ d3.csv(projects).then(data => {
         console.log(d)
           let project = projects.append("li");
 
+          project.append("img")
+          .attr("src", `${d.repo}/raw/master/cover.jpg`)
+          .style("width", "200px")
+          .style("height", "auto");
+
           project.append("p")
           .append("a")
-          .attr("href", d.repo)
+          .attr("href", d.link)
           .attr("target", "_blank")
           .style("color", "blue")
           .text(d.title);
 
           project.append("p")
+          .append("a")
+          .attr("href", d.repo)
+          .attr("target", "_blank")
+          .style("color", "blue")
+          .text("</>");
+
+          project.append("p")
           .text(d.desc);
 
-          
+
       });
 })
