@@ -15,9 +15,6 @@ d3.csv(lectures).then(data => {
           let lesson = lessons.append("li");
 
           lesson.append("p")
-          .append("a")
-          .attr("href", d.link)
-          .attr("target", "_blank")
           .text(d.title);
 
           lesson.append("p")
